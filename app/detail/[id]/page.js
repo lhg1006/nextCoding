@@ -1,6 +1,7 @@
 import {connectDB} from "../../../util/database";
 import {ObjectId} from "mongodb";
 import Comment from "@/app/detail/[id]/Comment";
+import {notFound} from "next/navigation";
 
 export default async function Detail(props) {
     const db = (await connectDB).db('forum');
@@ -8,6 +9,10 @@ export default async function Detail(props) {
 
     let postData;
     postData = post
+
+    if(result === null){
+        return notFound();
+    }
 
     return (
         <div>
